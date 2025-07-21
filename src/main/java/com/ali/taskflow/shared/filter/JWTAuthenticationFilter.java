@@ -1,7 +1,7 @@
 package com.ali.taskflow.shared.filter;
 
 import com.ali.taskflow.shared.service.JwtService;
-import com.ali.taskflow.user.projection.UserWithJwtProjection;
+import com.ali.taskflow.user.projection.UserDetailProjection;
 import com.ali.taskflow.user.repository.IUserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -41,7 +41,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
         String username = jwtService.getUsername(token);
         if (username!=null && SecurityContextHolder.getContext().getAuthentication()==null){
-            UserWithJwtProjection user = this.userRepository.findUserWithJwtByUsername(username)
+            UserDetailProjection user = this.userRepository.findUserWithUserDetail(username)
                     .orElseThrow();
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                     user,null,null

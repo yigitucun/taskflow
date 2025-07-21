@@ -7,7 +7,7 @@ import com.ali.taskflow.shared.exception.globalException.GlobalException;
 import com.ali.taskflow.shared.service.JwtService;
 import com.ali.taskflow.user.dto.requests.CreateUserRequest;
 import com.ali.taskflow.user.entity.User;
-import com.ali.taskflow.user.projection.UserWithJwtProjection;
+import com.ali.taskflow.user.projection.UserDetailProjection;
 import com.ali.taskflow.user.repository.IUserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -33,7 +33,7 @@ public class AuthService {
     }
 
     public TokeResponse login(AuthRequest request){
-        UserWithJwtProjection user = this.userRepository.findUserWithJwtByUsername(request.getUsername())
+        UserDetailProjection user = this.userRepository.findUserWithUserDetail(request.getUsername())
                 .orElseThrow(()->new GlobalException("Username or Password wrong", HttpStatus.BAD_GATEWAY));
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getUsername(),request.getPassword())

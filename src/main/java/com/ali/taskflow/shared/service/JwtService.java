@@ -1,14 +1,12 @@
 package com.ali.taskflow.shared.service;
 
-import com.ali.taskflow.shared.exception.globalException.GlobalException;
-import com.ali.taskflow.user.projection.UserWithJwtProjection;
+import com.ali.taskflow.user.projection.UserDetailProjection;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -29,11 +27,12 @@ public class JwtService {
         this.algorithm=Algorithm.HMAC256(SECRET_KEY);
         this.jwtVerifier=JWT.require(algorithm).build();
     }
+
     public Algorithm getAlgorithm(){
         return algorithm;
     }
 
-    public String generateToken(UserWithJwtProjection user){
+    public String generateToken(UserDetailProjection user){
         return JWT.create()
                 .withIssuer("TaskFlow")
                 .withSubject(user.getUsername())
@@ -41,7 +40,7 @@ public class JwtService {
                 .withClaim("username",user.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + accessTokenExpirationMs))
                 .withIssuedAt(Instant.now())
-                .sign(algorithm);
+                .sign(getAlgorithm());
     }
 
     public String getUsername(String token){
