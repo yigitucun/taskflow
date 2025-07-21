@@ -1,4 +1,62 @@
 package com.ali.taskflow.shared.service;
 
+import com.ali.taskflow.shared.exception.globalException.GlobalException;
+import com.ali.taskflow.user.projection.UserWithJwtProjection;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+
+import java.time.Instant;
+import java.util.Date;
+
+@Service
 public class JwtService {
+
+    @Value("${jwt.access-token.expiration}")
+    private long accessTokenExpirationMs;
+    @Value("${jwt.secret-key}")
+    private String SECRET_KEY;
+    private Algorithm algorithm;
+    private JWTVerifier jwtVerifier;
+
+    @PostConstruct
+    public void init(){
+        this.algorithm=Algorithm.HMAC256(SECRET_KEY);
+        this.jwtVerifier=JWT.require(algorithm).build();
+    }
+    public Algorithm getAlgorithm(){
+        return algorithm;
+    }
+
+    public String generateToken(UserWithJwtProjection user){
+        return JWT.create()
+                .withIssuer("TaskFlow")
+                .withSubject(user.getUsername())
+                .withClaim("id",user.getId())
+                .withClaim("username",user.getUsername())
+                .withExpiresAt(new Date(System.currentTimeMillis() + accessTokenExpirationMs))
+                .withIssuedAt(Instant.now())
+                .sign(algorithm);
+    }
+
+    public String getUsername(String token){
+        return jwtVerifier.verify(token).getClaim("username").asString();
+    }
+
+    public boolean isTokenValid(String token){
+        try{
+            jwtVerifier.verify(token);
+            return true;
+        }catch (JWTVerificationException e){
+            return false;
+        }
+    }
+
+
+
 }

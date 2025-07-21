@@ -1,5 +1,6 @@
 package com.ali.taskflow.auth.controller;
 
+import com.ali.taskflow.auth.dto.requests.AuthRequest;
 import com.ali.taskflow.auth.service.AuthService;
 import com.ali.taskflow.user.dto.requests.CreateUserRequest;
 import jakarta.validation.Valid;
@@ -16,6 +17,11 @@ public class AuthController {
 
     public AuthController(AuthService authService) {
         this.authService = authService;
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@Valid @RequestBody AuthRequest request) {
+        return ResponseEntity.status(200).body(authService.login(request));
     }
 
     @PostMapping("/register")
