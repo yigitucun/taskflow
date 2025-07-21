@@ -1,6 +1,7 @@
 package com.ali.taskflow.shared.service;
 
 import com.ali.taskflow.user.projection.UserDetailProjection;
+import com.ali.taskflow.user.repository.IUserRepository;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -21,6 +22,11 @@ public class JwtService {
     private String SECRET_KEY;
     private Algorithm algorithm;
     private JWTVerifier jwtVerifier;
+    private final IUserRepository userRepository;
+
+    public JwtService(IUserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @PostConstruct
     public void init(){
@@ -28,7 +34,7 @@ public class JwtService {
         this.jwtVerifier=JWT.require(algorithm).build();
     }
 
-    public Algorithm getAlgorithm(){
+    private Algorithm getAlgorithm(){
         return algorithm;
     }
 
