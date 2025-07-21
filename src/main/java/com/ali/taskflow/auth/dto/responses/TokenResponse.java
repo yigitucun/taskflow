@@ -2,12 +2,22 @@ package com.ali.taskflow.auth.dto.responses;
 
 public class TokeResponse {
     private String accessToken;
+    private String refreshToken;
 
-    public TokeResponse(String accessToken) {
+    public TokeResponse(String accessToken, String refreshToken) {
         this.accessToken = accessToken;
+        this.refreshToken = refreshToken;
     }
 
     public TokeResponse() {
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 
     public String getAccessToken() {

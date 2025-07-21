@@ -13,7 +13,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User extends BaseEntity implements UserDetails {
+public class User extends BaseEntity {
     @Column(nullable = false,unique = true)
     private String username;
     @Column(nullable = false,unique = true)
@@ -23,10 +23,6 @@ public class User extends BaseEntity implements UserDetails {
     @Column(nullable = false)
     private String fullName;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
-    }
 
     public User(long id, Instant createdAt, Instant updatedAt, String username, String email, String password, String fullName) {
         super(id, createdAt, updatedAt);
@@ -63,13 +59,4 @@ public class User extends BaseEntity implements UserDetails {
         this.fullName = fullName;
     }
 
-    @Override
-    public String getPassword() {
-        return this.password;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.username;
-    }
 }
