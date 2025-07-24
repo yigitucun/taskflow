@@ -8,16 +8,16 @@ import org.hibernate.validator.constraints.Length;
 
 public class CreateUserRequest {
     @UniqueUsername
-    @NotBlank(message = "required field")
+    @NotBlank
     private String username;
     @UniqueEmail
-    @Email(message = "not a valid email address")
-    @NotBlank(message = "required field")
+    @Email
+    @NotBlank
     private String email;
     @Length(min = 6,message = "must be at least 6 characters")
-    @NotBlank(message = "required field")
+    @NotBlank
     private String password;
-    @NotBlank(message = "required field")
+    @NotBlank
     private String fullName;
 
     public CreateUserRequest() {
