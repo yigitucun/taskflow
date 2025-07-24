@@ -1,7 +1,11 @@
 package com.ali.taskflow.auth.dto.requests;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class AuthRequest {
+    @NotBlank
     private String username;
+    @NotBlank
     private String password;
 
     public AuthRequest() {
