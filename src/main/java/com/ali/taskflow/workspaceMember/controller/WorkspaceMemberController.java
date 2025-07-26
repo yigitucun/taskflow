@@ -1,7 +1,7 @@
 package com.ali.taskflow.workspaceMember.controller;
 
 import com.ali.taskflow.user.entity.SecurityUser;
-import com.ali.taskflow.workspaceMember.annotation.RequireWorkspaceRole;
+import com.ali.taskflow.workspaceMember.aop.RequireWorkspaceRole;
 import com.ali.taskflow.workspaceMember.dto.requests.CreateWorkspaceMemberRequest;
 import com.ali.taskflow.workspaceMember.enums.Role;
 import com.ali.taskflow.workspaceMember.service.WorkspaceMemberService;

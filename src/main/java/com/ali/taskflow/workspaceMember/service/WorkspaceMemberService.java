@@ -6,7 +6,6 @@ import com.ali.taskflow.workspace.repository.IWorkspaceRepository;
 import com.ali.taskflow.workspace.rule.WorkspaceRule;
 import com.ali.taskflow.workspaceMember.dto.requests.CreateWorkspaceMemberRequest;
 import com.ali.taskflow.workspaceMember.entity.WorkspaceMember;
-import com.ali.taskflow.workspaceMember.enums.Role;
 import com.ali.taskflow.workspaceMember.mapper.WorkspaceMemberMapper;
 import com.ali.taskflow.workspaceMember.projection.ListMemberByWorkspace;
 import com.ali.taskflow.workspaceMember.repository.IWorkspaceMemberRepository;

@@ -35,8 +35,9 @@ public class SecurityConfig {
         return security
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request->request
-                        .requestMatchers("/api/workspace-members/**").authenticated()
-                        .requestMatchers(HttpMethod.POST,"/api/workspaces").authenticated()
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/api/**").authenticated()
+                        .requestMatchers(HttpMethod.DELETE,"/api/**").authenticated()
                         .anyRequest().permitAll()
                 )
                 .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class)

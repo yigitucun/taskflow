@@ -24,11 +24,9 @@ public interface IWorkspaceMemberRepository extends JpaRepository<WorkspaceMembe
     @Query(value = "SELECT role FROM workspace_members WHERE user_id = :userId AND workspace_id = :workspaceId", nativeQuery = true)
     Optional<String> findRoleByUserIdAndWorkspaceId(@Param("userId") Long userId, @Param("workspaceId") Long workspaceId);
 
-
     @Modifying
     @Transactional
     @Query("DELETE FROM WorkspaceMember wm WHERE wm.user.id = :userId AND wm.workspace.id = :workspaceId")
     void deleteByUserIdAndWorkspaceId(@Param("userId") Long userId, @Param("workspaceId") Long workspaceId);
-
 
 }
