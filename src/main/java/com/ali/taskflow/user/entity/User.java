@@ -35,6 +35,14 @@ public class User extends BaseEntity {
     public User() {
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }

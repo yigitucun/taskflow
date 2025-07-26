@@ -1,6 +1,7 @@
 package com.ali.taskflow.user.controller;
 
 import com.ali.taskflow.user.entity.User;
+import com.ali.taskflow.user.projection.ListUserProjection;
 import com.ali.taskflow.user.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,7 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getAll(){
+    public ResponseEntity<List<ListUserProjection>> getAll(){
         return ResponseEntity.ok(this.userService.getAll());
     }
 

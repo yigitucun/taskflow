@@ -1,6 +1,6 @@
 package com.ali.taskflow.user.service;
 
-import com.ali.taskflow.user.entity.User;
+import com.ali.taskflow.user.projection.ListUserProjection;
 import com.ali.taskflow.user.repository.IUserRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<User> getAll(){
-        return this.userRepository.findAll();
+    public List<ListUserProjection> getAll(){
+        return this.userRepository.findAllBy();
     }
 }
