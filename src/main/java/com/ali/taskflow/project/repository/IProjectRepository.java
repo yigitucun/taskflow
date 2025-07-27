@@ -14,7 +14,7 @@ import java.util.Optional;
 @Repository
 public interface IProjectRepository extends JpaRepository<Project, Long> {
 
-    @Query(value = "SELECT p.workspace_id,p.user_id as ownerId FROM projects p WHERE p.id=:projectId ",nativeQuery = true)
+    @Query(value = "SELECT p.id, p.workspace_id,p.user_id as ownerId FROM projects p WHERE p.id=:projectId ",nativeQuery = true)
     Optional<ProjectBasicInfo> findBasicInfoByProjectId(@Param("projectId") long projectId);
 
     @Query(value =  "SELECT p.id,p.name,p.user_id as ownerId,u.username as ownerUsername FROM projects p" +
