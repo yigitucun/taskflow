@@ -1,4 +1,4 @@
-# Proje Adı: TaskFlow - Modern Görev Yönetim Sistemi
+# TaskFlow - Modern Görev Yönetim Sistemi
 
 ![Docker](https://img.shields.io/badge/Docker-Supported-blue?logo=docker)
 ![Java](https://img.shields.io/badge/Java-21-blue)
